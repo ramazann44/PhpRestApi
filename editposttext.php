@@ -3,9 +3,8 @@
 include("ayar.php");
 
 $uyeid = $_POST["uyeid"];
-$posttype = $_POST["posttype"];
-$text = $_POST["text"];
-$tarih = $_POST["tarih"];
+$postid = $_POST["postid"];
+$newposttext = $_POST["posttext"];
 
 class Result{
     
@@ -14,9 +13,9 @@ class Result{
 }
 $result = new Result();
 
-$ekle = mysqli_query($baglan,"insert into eidospostlar (uyeid,posttype,text,begeni,yorumsayisi,tarih) values ('$uyeid','$posttype','$text','0','0','$tarih')");
+$updateposttext = mysqli_query($baglan,"update eidospostlar set text = '$newposttext' where id = '$postid' and uyeid = '$uyeid'");
 
-if($ekle){
+if($updateposttext){
     
     $result-> tf = true;
     echo(json_encode($result));
